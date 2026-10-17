@@ -118,6 +118,18 @@ cd ../..
 
 Run migrations again after pulling schema changes that add a new migration. For a clean local database, `migrate dev` applies the existing migration history and creates the development database schema.
 
+## Run with Docker
+
+From the repository root, copy `.env.example` to `.env` and replace the example secrets. Then run:
+
+```sh
+docker compose up --build -d
+```
+
+Compose builds the frontend, API, and WebSocket images, starts the official PostgreSQL and Redis images, and applies database migrations. Open `http://localhost:3000`; the API and WebSocket ports are `4000` and `5000`. PostgreSQL data is stored in a named Docker volume. Stop the stack with `docker compose down`.
+
+The current frontend and API are configured for local development URLs and CORS. Before deploying this stack on EC2 for public access, configure the frontend API/WebSocket URLs and the API's allowed origin for your domain. Do not use the example secrets in a public deployment.
+
 ## Run the application
 
 Start each process in its own terminal from the repository root. The API has no `dev` script, so start it directly with Bun.
