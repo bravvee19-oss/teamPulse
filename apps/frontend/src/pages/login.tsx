@@ -72,7 +72,7 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:4000/api/v1/signin',
+        'https://api.jaideepmahala.online/api/v1/signin',
         {
           email: formData.email.trim(),
           password: formData.password,
@@ -107,7 +107,7 @@ const Login: React.FC = () => {
   };
 
   const handleGoogleLogin = async (): Promise<void> => {
-    window.location.assign('http://localhost:4000/api/v1/auth/google');
+    window.location.assign('https://api.jaideepmahala.online/api/v1/auth/google');
   };
 
   return (

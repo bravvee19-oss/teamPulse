@@ -26,10 +26,8 @@ export function useBoardPresence(boardId: string): number | null {
     let cancelled = false;
 
     const connect = () => {
-      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-      const host = window.location.hostname;
       socket = new WebSocket(
-        `${protocol}//${host}:5000?token=${encodeURIComponent(token)}`,
+        `wss://ws.jaideepmahala.online?token=${encodeURIComponent(token)}`,
       );
       socket.onopen = () => {
         socket?.send(JSON.stringify({ type: "join", boardId }));

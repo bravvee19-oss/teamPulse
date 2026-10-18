@@ -98,7 +98,7 @@ export default function Board({
       try {
         const token = sessionStorage.getItem("authToken");
         const response = await axios.post(
-          `http://localhost:4000/api/v1/issue/${sectionIds[section]}`,
+          `https://api.jaideepmahala.online/api/v1/issue/${sectionIds[section]}`,
           { title, description: "" },
           { headers: { Authorization: token ?? "" } },
         );
@@ -135,7 +135,7 @@ export default function Board({
       try {
         const token = sessionStorage.getItem("authToken");
         await axios.put(
-          `http://localhost:4000/api/v1/issue/move/${issueId}/${sectionIds[next]}`,
+          `https://api.jaideepmahala.online/api/v1/issue/move/${issueId}/${sectionIds[next]}`,
           {},
           { headers: { Authorization: token ?? "" } },
         );
@@ -161,7 +161,7 @@ export default function Board({
       const token = sessionStorage.getItem("authToken");
       try {
         const response = await axios.post(
-          `http://localhost:4000/api/v1/comment/${issueId}`,
+          `https://api.jaideepmahala.online/api/v1/comment/${issueId}`,
           { comment: text },
           { headers: { Authorization: token ?? "" } },
         );
@@ -202,7 +202,7 @@ export default function Board({
   const handleRefreshComments = useCallback(async (issueId: string) => {
     const token = sessionStorage.getItem("authToken");
     const response = await axios.get(
-      `http://localhost:4000/api/v1/comment/${issueId}`,
+      `https://api.jaideepmahala.online/api/v1/comment/${issueId}`,
       { headers: { Authorization: token ?? "" } },
     );
     const comments = (response.data.data ?? []).map((comment: {
@@ -387,13 +387,13 @@ export function BoardRoute() {
         const headers = { Authorization: token ?? "" };
         const [response, sectionsResponse] = await Promise.all([
           axios.get(
-            `http://localhost:4000/api/v1/organization/${encodeURIComponent(orgId)}`,
+            `https://api.jaideepmahala.online/api/v1/organization/${encodeURIComponent(orgId)}`,
             { headers },
           ).catch((requestError) => {
             throw new Error(`Organization request failed: ${getRequestErrorMessage(requestError)}`);
           }),
           axios.get(
-            `http://localhost:4000/api/v1/section?orgId=${encodeURIComponent(orgId)}`,
+            `https://api.jaideepmahala.online/api/v1/section?orgId=${encodeURIComponent(orgId)}`,
             { headers },
           ).catch((requestError) => {
             throw new Error(`Board request failed: ${getRequestErrorMessage(requestError)}`);
@@ -426,7 +426,7 @@ export function BoardRoute() {
         const issues = emptySections();
         const loadedSections = await Promise.all(SECTION_ORDER.map(async (section) => {
           const issueResponse = await axios.get(
-            `http://localhost:4000/api/v1/issue/section/${sectionIds[section]}`,
+            `https://api.jaideepmahala.online/api/v1/issue/section/${sectionIds[section]}`,
             { headers },
           ).catch((requestError) => {
             throw new Error(`Issue request failed: ${getRequestErrorMessage(requestError)}`);

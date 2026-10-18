@@ -148,7 +148,7 @@ const Signup: React.FC = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:4000/api/v1/signup',
+        'https://api.jaideepmahala.online/api/v1/signup',
         {
           email: formData.email.trim(),
           password: formData.password,

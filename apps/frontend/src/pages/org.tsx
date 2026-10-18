@@ -33,7 +33,7 @@ const OrganizationPopup = () => {
       try {
         const token = sessionStorage.getItem("authToken");
         const response = await axios.get(
-          "http://localhost:4000/api/v1/organization",
+          "https://api.jaideepmahala.online/api/v1/organization",
           { headers: { Authorization: token ?? "" } },
         );
 
@@ -65,7 +65,7 @@ const OrganizationPopup = () => {
     try {
       const token = sessionStorage.getItem("authToken");
       const response = await axios.post(
-        "http://localhost:4000/api/v1/organization/create",
+        "https://api.jaideepmahala.online/api/v1/organization/create",
         {
           name: organizationName.trim(),
           description: description.trim(),
@@ -101,7 +101,7 @@ const OrganizationPopup = () => {
     try {
       const token = sessionStorage.getItem("authToken");
       const response = await axios.post(
-        `http://localhost:4000/api/v1/accept/${encodeURIComponent(inviteCode.trim())}`,
+        `https://api.jaideepmahala.online/api/v1/accept/${encodeURIComponent(inviteCode.trim())}`,
         {},
         { headers: { Authorization: token ?? "" } },
       );
