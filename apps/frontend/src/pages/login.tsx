@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 
 interface LoginFormData {
   email: string;
@@ -72,7 +73,7 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post(
-        'https://api.jaideepmahala.online/api/v1/signin',
+        `${API_BASE_URL}/signin`,
         {
           email: formData.email.trim(),
           password: formData.password,
@@ -107,7 +108,7 @@ const Login: React.FC = () => {
   };
 
   const handleGoogleLogin = async (): Promise<void> => {
-    window.location.assign('https://api.jaideepmahala.online/api/v1/auth/google');
+    window.location.assign(`${API_BASE_URL}/auth/google`);
   };
 
   return (

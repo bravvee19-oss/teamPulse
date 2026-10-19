@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useBoardPresence } from "../hooks/useBoardPresence";
+import { API_BASE_URL } from "../api";
 import IssueModal from "./issue.tsx";
 import {
   PART_LABEL,
@@ -98,7 +99,7 @@ export default function Board({
       try {
         const token = sessionStorage.getItem("authToken");
         const response = await axios.post(
-          `https://api.jaideepmahala.online/api/v1/issue/${sectionIds[section]}`,
+          `${API_BASE_URL}/issue/${sectionIds[section]}`,
           { title, description: "" },
           { headers: { Authorization: token ?? "" } },
         );
@@ -135,7 +136,7 @@ export default function Board({
       try {
         const token = sessionStorage.getItem("authToken");
         await axios.put(
-          `https://api.jaideepmahala.online/api/v1/issue/move/${issueId}/${sectionIds[next]}`,
+          `${API_BASE_URL}/issue/move/${issueId}/${sectionIds[next]}`,
           {},
           { headers: { Authorization: token ?? "" } },
         );
@@ -161,7 +162,7 @@ export default function Board({
       const token = sessionStorage.getItem("authToken");
       try {
         const response = await axios.post(
-          `https://api.jaideepmahala.online/api/v1/comment/${issueId}`,
+          `${API_BASE_URL}/comment/${issueId}`,
           { comment: text },
           { headers: { Authorization: token ?? "" } },
         );
@@ -202,7 +203,7 @@ export default function Board({
   const handleRefreshComments = useCallback(async (issueId: string) => {
     const token = sessionStorage.getItem("authToken");
     const response = await axios.get(
-      `https://api.jaideepmahala.online/api/v1/comment/${issueId}`,
+      `${API_BASE_URL}/comment/${issueId}`,
       { headers: { Authorization: token ?? "" } },
     );
     const comments = (response.data.data ?? []).map((comment: {
@@ -387,13 +388,13 @@ export function BoardRoute() {
         const headers = { Authorization: token ?? "" };
         const [response, sectionsResponse] = await Promise.all([
           axios.get(
-            `https://api.jaideepmahala.online/api/v1/organization/${encodeURIComponent(orgId)}`,
+            `${API_BASE_URL}/organization/${encodeURIComponent(orgId)}`,
             { headers },
           ).catch((requestError) => {
             throw new Error(`Organization request failed: ${getRequestErrorMessage(requestError)}`);
           }),
           axios.get(
-            `https://api.jaideepmahala.online/api/v1/section?orgId=${encodeURIComponent(orgId)}`,
+            `${API_BASE_URL}/section?orgId=${encodeURIComponent(orgId)}`,
             { headers },
           ).catch((requestError) => {
             throw new Error(`Board request failed: ${getRequestErrorMessage(requestError)}`);
@@ -426,7 +427,7 @@ export function BoardRoute() {
         const issues = emptySections();
         const loadedSections = await Promise.all(SECTION_ORDER.map(async (section) => {
           const issueResponse = await axios.get(
-            `https://api.jaideepmahala.online/api/v1/issue/section/${sectionIds[section]}`,
+            `${API_BASE_URL}/issue/section/${sectionIds[section]}`,
             { headers },
           ).catch((requestError) => {
             throw new Error(`Issue request failed: ${getRequestErrorMessage(requestError)}`);

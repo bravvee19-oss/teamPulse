@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Code2, Server, Boxes } from "lucide-react";
+import { API_BASE_URL } from "../api";
 import "./dashboard.css";
 
 const sections = [
@@ -31,8 +32,8 @@ export default function Dashboard() {
         const token = sessionStorage.getItem("authToken");
         const response = await axios.get(
           orgId
-            ? `https://api.jaideepmahala.online/api/v1/organization/${encodeURIComponent(orgId)}`
-            : "https://api.jaideepmahala.online/api/v1/organization",
+            ? `${API_BASE_URL}/organization/${encodeURIComponent(orgId)}`
+            : `${API_BASE_URL}/organization`,
           { headers: { Authorization: token ?? "" } },
         );
         const membership = orgId
@@ -73,7 +74,7 @@ export default function Dashboard() {
     try {
       const token = sessionStorage.getItem("authToken");
       const response = await axios.post(
-        "https://api.jaideepmahala.online/api/v1/invite",
+        `${API_BASE_URL}/invite`,
         { email: inviteEmail.trim(), orgId: organization.id },
         { headers: { Authorization: token ?? "" } },
       );

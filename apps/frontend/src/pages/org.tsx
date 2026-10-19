@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from "../api";
 import "./org.css";
 
 type PopupMode = "choice" | "create" | "join";
@@ -33,7 +34,7 @@ const OrganizationPopup = () => {
       try {
         const token = sessionStorage.getItem("authToken");
         const response = await axios.get(
-          "https://api.jaideepmahala.online/api/v1/organization",
+          `${API_BASE_URL}/organization`,
           { headers: { Authorization: token ?? "" } },
         );
 
@@ -65,7 +66,7 @@ const OrganizationPopup = () => {
     try {
       const token = sessionStorage.getItem("authToken");
       const response = await axios.post(
-        "https://api.jaideepmahala.online/api/v1/organization/create",
+        `${API_BASE_URL}/organization/create`,
         {
           name: organizationName.trim(),
           description: description.trim(),
@@ -101,7 +102,7 @@ const OrganizationPopup = () => {
     try {
       const token = sessionStorage.getItem("authToken");
       const response = await axios.post(
-        `https://api.jaideepmahala.online/api/v1/accept/${encodeURIComponent(inviteCode.trim())}`,
+        `${API_BASE_URL}/accept/${encodeURIComponent(inviteCode.trim())}`,
         {},
         { headers: { Authorization: token ?? "" } },
       );

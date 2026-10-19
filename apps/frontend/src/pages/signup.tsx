@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import './signup.css';
 import axios from 'axios';
+import { API_BASE_URL } from '../api';
 
 interface SignupFormData {
   fullName: string;
@@ -148,7 +149,7 @@ const Signup: React.FC = () => {
 
     try {
       const response = await axios.post(
-        'https://api.jaideepmahala.online/api/v1/signup',
+        `${API_BASE_URL}/signup`,
         {
           email: formData.email.trim(),
           password: formData.password,

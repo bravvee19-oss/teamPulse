@@ -10,7 +10,7 @@ import commentRouter from "./src/comment";
 import { errorHandler } from "./helper/errorHandler";
 
 const app = express();
-app.use(cors({ origin: "https://jaideepmahala.online" }));
+app.use(cors({ origin: process.env.FRONTEND_URL ?? "https://jaideepmahala.online" }));
 app.use(express.json());
 
 app.get("/health", (_req, res) => {
