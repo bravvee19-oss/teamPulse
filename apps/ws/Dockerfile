@@ -18,7 +18,7 @@ COPY apps/ws ./apps/ws
 COPY packages/db ./packages/db
 COPY packages/redis ./packages/redis
 
-RUN cd packages/db && bunx prisma generate --schema prisma/schema.prisma
+RUN cd packages/db && DATABASE_URL="postgresql://user:pass@localhost:5432/db" bunx prisma generate --schema prisma/schema.prisma
 
 ENV NODE_ENV=production
 ENV WS_PORT=5000
