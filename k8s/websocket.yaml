@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: websocket
+  namespace: teampulse
 spec:
   selector:
     app: websocket
@@ -15,6 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: websocket
+  namespace: teampulse
 spec:
   replicas: 1
   selector:
@@ -46,10 +48,7 @@ spec:
                   name: teampulse-secrets
                   key: JWT_SECRET
             - name: REDIS_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: teampulse-config
-                  key: REDIS_URL
+              value: "redis://redis:6379"
           readinessProbe:
             tcpSocket:
               port: websocket
