@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: 900532378485.dkr.ecr.us-west-2.amazonaws.com/teampulse-backend:b0dd780
+          image: 900532378485.dkr.ecr.us-west-2.amazonaws.com/teampulse-backend:00da329
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
