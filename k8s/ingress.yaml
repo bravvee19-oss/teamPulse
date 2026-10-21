@@ -7,11 +7,8 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts: [jaideepmahala.online]
-      secretName: teampulse-tls
   rules:
-    - host: jaideepmahala.online
+    - host: api.jaideepmahala.online
       http:
         paths:
           - path: /api/v1
@@ -20,4 +17,3 @@ spec:
           - path: /ws
             pathType: Prefix
             backend: { service: { name: websocket, port: { number: 5000 } } }
-          
