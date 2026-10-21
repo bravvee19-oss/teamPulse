@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: teampulse.local
+    - host: jaideepmahala.online
       http:
         paths:
           - path: /api/v1
@@ -25,10 +25,4 @@ spec:
                 name: websocket
                 port:
                   number: 5000
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: frontend
-                port:
-                  number: 3000
+          
