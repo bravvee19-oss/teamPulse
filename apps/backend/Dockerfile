@@ -18,6 +18,8 @@ COPY apps/backend ./apps/backend
 COPY packages/db ./packages/db
 COPY packages/redis ./packages/redis
 
+RUN cd packages/db && bunx prisma generate --schema prisma/schema.prisma
+
 ENV NODE_ENV=production
 
 EXPOSE 4000
